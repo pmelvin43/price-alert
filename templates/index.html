@@ -1,35 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-9" />
+<html>
+  <head lang="en">
+    <meta charset="utf-8" />
     <title>Price Alert</title>
     <link
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     />
-    <link href="../static/css/indexStyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/css/indexStyle.css" />
   </head>
+
   <body>
-    <header class="masthead">
-      <h1>Price Alert</h1>
-
-      <form class="searchbar" method="get" action="/search">
-        <input type="search" name="Search" placeholder="Find Amazon Products" />
-        <button type="submit">Search</button>
-      </form>
-
-      <a class="login" href="login.html"><button>Login</button></a>
-      <a class="createacc" href="create-account.html"
-        ><button>Create Account</button></a
-      >
-    </header>
-
-    <p>placeholder</p>
-
-    <footer class="footer">
-      <div class="container">
-        <p>&copy; 2024 Price Alert</p>
+    <header id="masthead">
+      <div id="searchbar">
+        <form action="/search" method="get">
+          <input
+            type="text"
+            id="search"
+            name="search"
+            placeholder="Find Amazon Products"
+          />
+          <button type="submit">Search</button>
+        </form>
       </div>
-    </footer>
+      <h1>Price Alert</h1>
+      <div id="register-button">
+        <a href="login.html">User Account</a>
+      </div>
+    </header>
   </body>
 </html>
