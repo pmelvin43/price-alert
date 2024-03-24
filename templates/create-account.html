@@ -7,6 +7,13 @@
     <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
   </head>
   <body>
+
+    <header id="masthead">
+      <div id="searchbar">
+      </div>
+      <h1>Price Alert</h1>
+    </header>
+
     <div class="login-container">
       <h2>Create Account</h2>
       <form action="/submit-your-account-creation-form" method="post">
@@ -36,7 +43,9 @@
             required
           />
         </div>
-        <button type="submit" class="sign-in-btn">Create Account</button>
+        <div class="button-group">
+          <button type="submit" class="sign-in-btn">Create Account</button>
+        </div>
       </form>
     </div>
   </body>
