@@ -1,29 +1,69 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  /* font-family: Arial, sans-serif; */
+  /* background-image: linear-gradient(#d1d1d1, white); */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* height: 100vh; */
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: 700;
+  color: #141e46;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  margin: auto;
+}
+
+h2 {
+  color: black;
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); */
+}
+
+
+#masthead {
+  /* background: #d1d1d1; */
+  background-image: linear-gradient(white, #d1d1d1);
+  padding: 5em;
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
+  justify-content: space-between;
+  /* background-color: #d1d1d1; */
+  /* font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .login-container {
-  background: white;
-  padding: 20px;
+  background-image: linear-gradient(#d1d1d1, white);
+  color: black;
+  text-shadow: 2px 2px 4px rgba(224, 217, 217, 0.4);
+  /* background: white; */
+  padding: 5em;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  width: 300px;
+  font-weight: 500;  
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 300px; */
+}
+
+.login-container p{
+  text-align: center;
 }
 
 .login-container h2 {
   text-align: center;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 30px;
+  font-weight: 500;
   margin-bottom: 20px;
 }
 
 .input-group {
   margin-bottom: 20px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 label {
@@ -31,47 +71,66 @@ label {
   margin-bottom: 5px;
 }
 
+
 input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid #ddd;
+  border: 1px solid black;
   border-radius: 5px;
   box-sizing: border-box;
 }
 
 button {
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 1em;
+  
+}
+
+.button-group {
+
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  
+
 }
 
 .sign-in-btn {
-  background-color: #007bff;
+  background-color: #141e46;
+  font-weight: bold;
   color: white;
+  box-shadow: 0 5px 3px 0px rgba(26, 26, 26, 0.25);
+  border: 1px solid black;
 }
 
 .sign-in-btn:hover {
-  background-color: #0056b3;
+  background-color: #4ac4cf;
 }
 
 .create-account-btn {
-  background-color: #28a745;
-  color: white;
+  font-weight: bold;
+  background-color: #f6d251;
+  color: black;
+  box-shadow: 0 5px 3px 0px rgba(26, 26, 26, 0.25);
+  border: 1px solid black;
 }
 
 .create-account-btn:hover {
-  background-color: #218838;
+  background-color: #f7a015;
 }
 
 .forget-password-link {
   display: block;
   margin: 10px 0;
-  color: #007bff;
+  color: #03c;
   text-align: center;
   text-decoration: none;
 }
@@ -84,7 +143,7 @@ input[type="email"] {
   width: 100%;
   padding: 15px;
   margin-top: 5px;
-  border: 1px solid #ddd;
+  border: 1px solid black;
   border-radius: 5px;
   box-sizing: border-box;
 }
@@ -95,7 +154,8 @@ input[type="email"] {
   width: 100%;
   padding: 15px;
   margin-top: 5px;
-  border: 1px solid #ddd;
+  border: 1px solid black;
   border-radius: 5px;
   box-sizing: border-box;
 }
+
