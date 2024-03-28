@@ -1,22 +1,2 @@
-<!DOCTYPE html>
-<html>
-
-
-<?php
-
-$host = "localhost";
-$database = "db_25141755";
-$user = "25141755";
-$password = "25141755";
-
-$conn = new mysqli($host, $user, $password, $database);
-
-$error = mysqli_connect_error();
-if($error != null)
-{
-  $output = "<p>Unable to connect to database!</p>";
-  exit($output);
-}
-
-?>
-</html>
+$connection =
+mysqli_connect("localhost","25141755","25141755","db_25141755");
