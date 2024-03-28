@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     mysqli_close($connection);
 
     // Go to next page
-    header("Location:userDash.php");
+    header("Location:/index.php");
     exit();
 } else {
     // The condition for bad data being injected via a GET request
