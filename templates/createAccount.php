@@ -1,62 +1,57 @@
-<?php
-// Database connection details
-require_once 'db_connect.php';
+<!DOCTYPE html>
+<html>
+<body>
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $servername = "localhost";
+        $username = "25141755";
+        $password = "25141755";
+        $dbname = "db_25141755";
+        $connection = new mysqli($servername, $username, $password, $dbname);
+        if(mysqli_connect_error()) {
+            echo "<p>Unable to connect to database!</p>";
+            echo "<p><a href='javascript:history.back()'>Return to User Entry</a></p>";
+            exit();
+        }
+        if(isset($_POST['firstname'], $_POST['lastname'], $_POST['username'], $_POST['email'], $_POST['password'])) {
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $checkQuery = "SELECT * FROM users WHERE username = '$username' OR email = '$email' LIMIT 1";
+            $result = mysqli_query($connection, $checkQuery);
+            if($result) {
+                $user = mysqli_fetch_assoc($result);
+                if ($user) {
+                    if ($user['username'] === $username || $user['email'] === $email) {
+                        echo "<p>User already exists with this name and/or email.</p>";
+                        echo "<p><a href='javascript:history.back()'>Return to User Entry</a></p>";
+                    }
+                } else {
+                    $hashed_password = md5($password);
+                    $insert = "INSERT INTO users (firstname, lastname, username, email, password) VALUES ('$firstname', '$lastname', '$username', '$email', '$hashed_password')";
 
-
-// Check if the request is POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // Sanitize and assign POST data to variables
-    $firstname = htmlspecialchars($_POST['firstname']);
-    $lastname = htmlspecialchars($_POST['lastname']);
-    $username = htmlspecialchars($_POST['username']);
-    $email = htmlspecialchars($_POST['email']);
-    $password = htmlspecialchars($_POST['password']);
-
-    // Password storage
-    // Hash the password using md5
-    $hashedPassword = md5($password);
-
-    // Check if user already exists with the same username or email
-    $stmt = $connection->prepare("SELECT COUNT(*) as usercount FROM users WHERE username = ? OR email = ?");
-    $stmt->bind_param("ss", $username, $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-
-    // If user with the same username or email exist, automatically go back
-    if ($row['usercount'] > 0) {
-            
-            echo '<script type="text/javascript">';
-            echo 'alert("User already exist");';
-            echo 'window.location.href="create-account.html";';
-            echo '</script>';
-            die();
+                    if(mysqli_query($connection, $insert)) {
+                        echo "<p>An account for " . ($firstname) . " has been created.</p>";
+                    } else {
+                        echo "<p>Error: " . mysqli_error($connection) . "</p>";
+                        echo "<p><a href='javascript:history.back()'>Return to User Entry</a></p>";
+                    }
+                }
+            } else {
+                echo "<p>Error checking user existence.</p>";
+                echo "<p><a href='javascript:history.back()'>Return to User Entry</a></p>";
+            }
+            mysqli_free_result($result);
+            mysqli_close($connection);
+        } else {
+            echo "<p>Error: All fields are required.</p>";
+            echo "<p><a href='javascript:history.back()'>Return to User Entry</a></p>";
+        }
+    } else {
+        echo "<p>Invalid request.</p>";
     }
-
-    // User creation in DB
-    // Prepare INSERT statement since no user exists with the same username or email
-    $stmt = $connection->prepare("INSERT INTO users (firstname, lastname, username, email, password) VALUES (?, ?, ?, ?, ?)");
-
-    // Bind parameters and execute the statement
-    $stmt->bind_param("sssss", $firstname, $lastname, $username, $email, $hashedPassword);
-    $stmt->execute();
-
-    // echo "An account for the user ".$username. " has been created";
-
-    $stmt->close();
-
-    // Close Database
-    mysqli_close($connection);
-
-    // Go to next page
-    echo '<script type="text/javascript">';
-    echo 'alert("User created");';
-    echo 'window.location.href="https://cosc360.ok.ubc.ca/yiuunamn/login.html";';
-    echo '</script>';
-    die();
-} else {
-    // The condition for bad data being injected via a GET request
-    die('This page does not accept GET requests.');
-}
-?>
+    ?>
+</body>
+</html>
