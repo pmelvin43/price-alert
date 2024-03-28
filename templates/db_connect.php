@@ -5,9 +5,9 @@
 <?php
 
 $host = "localhost";
-$database = "price-alert";
-$user = "root";
-$password = "";
+$database = "db_25141755";
+$user = "25141755";
+$password = "25141755";
 
 $connection = mysqli_connect($host, $user, $password, $database);
 
