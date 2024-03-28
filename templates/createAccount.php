@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Go to next page
     echo '<script type="text/javascript">';
     echo 'alert("User created");';
-    echo 'window.location.href="login.html";';
+    echo 'window.location.href="https://cosc360.ok.ubc.ca/yiuunamn/login.html";';
     echo '</script>';
     die();
 } else {
