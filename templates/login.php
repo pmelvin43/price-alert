@@ -9,61 +9,35 @@
         $password = "25141755";
         $dbname = "db_25141755";
         $connection = new mysqli($servername, $username, $password, $dbname);
-        if(mysqli_connect_error()) {
-            echo "<p>Unable to connect to database!</p>";
-            echo "<p><a href='javascript:history.back()'>go back</a></p>";
-            exit();
-        }
+           if(mysqli_connect_error()) {
+        echo "<p>Unable to connect to database!</p>";
+        exit();
+    }
+    if ($_SERVER["REQUEST_METHOD"]=="POST") {
+        if (isset($_POST["username"]) && isset($_POST["password"])) {
+            $username = mysqli_real_escape_string($connection,$_POST["username"]);
+            $password = mysqli_real_escape_string($connection,$_POST["password"]);
 
+            $hashed_password = md5($password);
+            $login="SELECT * FROM users WHERE username = '$username' AND password ='$hashed_password'";
+            $result=mysqli_query($connection, $login);
 
-    // Sanitize user inputs
-    $username = mysqli_real_escape_string($connection, filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING));
-    $password = mysqli_real_escape_string($connection, $_POST['password']); 
-    // Hashing password with md5
-    $hashedPassword = md5($password);
-
-    // Prepare SELECT statement to fetch user with the username
-    $stmt = $connection->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc();
-
-        // Verify the password against the hashed password in DB
-        if ($hashedPassword == $user['password']) {
-            // Password is correct, so start a new session and save the username to the session
-            $_SESSION['username'] = $username;
-            // echo 'Hi, '.$username.'<br>You are logged in.</a>';
+            if($result&&mysqli_num_rows($result) > 0) {
+                echo "<p>User has a valid account.</p>";
+            } else {
+                echo "<p>Invalid username and/or password.</p>";
+                echo "<p><a href='javascript:history.back()'>Return to Login</a></p>";
+            }
         } else {
-            // Password is not correct
-            echo '<script type="text/javascript">';
-            echo 'alert("Wrong Password");';
-            echo 'window.location.href="login.html";';
-            echo '</script>';
-            die();
+            echo "<p>Username and password required.</p>";
+            echo "<p><a href='javascript:history.back()'>Return to Login</a></p>";
         }
-    } else {
-        // No user found with the username
-        echo '<script type="text/javascript">';
-        echo 'alert("User not found");';
-        echo 'window.location.href="https://cosc360.ok.ubc.ca/yiuunamn/login.html";';
-        echo '</script>';
-        die();
+    } 
+    else {
+        echo "<p>Invalid request.</p>";
     }
 
-    $stmt->close();
-    // Close Database
     mysqli_close($connection);
-
-    // Go to next page
-    header("Location:home.php");
-    exit();
-} else {
-    // The condition for bad data being injected via a GET request
-    die('This page does not accept GET requests.');
-}
-?>
+    ?>
 </body>
 </html>
