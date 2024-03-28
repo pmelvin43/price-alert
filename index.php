@@ -1,1 +1,1 @@
-<?php header("Location: templates/home.jsp"); ?>
+<?php header("Location: price-alert/templates/home.jsp"); ?>
