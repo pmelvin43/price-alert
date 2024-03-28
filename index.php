@@ -1,1 +1,1 @@
-<?php header("Location: price-alert/templates/home.php"); ?>
+<?php header("home.php"); ?>
