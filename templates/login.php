@@ -1,13 +1,19 @@
-<?php
-// Start the session at the very beginning
-session_start();
 
-// Database connection details
-require_once 'db_connect.php';
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-// Check if the form was submitted via post
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+<!DOCTYPE html>
+<html>
+<body>
+    <?php
+        $servername = "localhost";
+        $username = "25141755";
+        $password = "25141755";
+        $dbname = "db_25141755";
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if(mysqli_connect_error()) {
+            echo "<p>Unable to connect to database!</p>";
+            echo "<p><a href='javascript:history.back()'>go back</a></p>";
+            exit();
+        }
+
 
     // Sanitize user inputs
     $username = mysqli_real_escape_string($connection, filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING));
@@ -58,3 +64,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     die('This page does not accept GET requests.');
 }
 ?>
+</body>
+</html>
