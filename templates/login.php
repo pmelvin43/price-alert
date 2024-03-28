@@ -4,7 +4,8 @@ session_start();
 
 // Database connection details
 require_once 'db_connect.php';
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 // Check if the form was submitted via post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
