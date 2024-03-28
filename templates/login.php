@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Password is not correct
             echo '<script type="text/javascript">';
             echo 'alert("Wrong Password");';
-            echo 'window.location.href="https://cosc360.ok.ubc.ca/yiuunamn/login.html";';
+            echo 'window.location.href="login.html";';
             echo '</script>';
             die();
         }
