@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Product Upload</title>
+</head>
+<body>
+    <h2>Product Upload Form</h2>
+    <form action="addproduct.php" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="productName">Product Name:</label><br>
+            <input type="text" id="productName" name="productName" required>
+        </div>
+        <div>
+            <label for="productPrice">Product Price:</label><br>
+            <input type="number" id="productPrice" name="productPrice" required step="0.01">
+        </div>
+        <div>
+            <label for="description">Product Description:</label><br>
+            <textarea id="description" name="description" required rows="4" cols="50"></textarea>
+        </div>
+        <div>
+            <input type="submit" value="Upload Product">
+            <a href="home.jsp">Go Back</a>
+        </div>
+    </form>
+</body>
+</html>
