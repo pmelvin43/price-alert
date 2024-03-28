@@ -33,7 +33,7 @@
                     $insert = "INSERT INTO users (firstname, lastname, username, email, password) VALUES ('$firstname', '$lastname', '$username', '$email', '$hashed_password')";
 
                     if(mysqli_query($connection, $insert)) {
-                        echo "<p>An account for " . ($firstname) . " has been created.</p>";
+                        echo "<p><a href='javascript:history.back()'>Login</a></p>";
                     } else {
                         echo "<p>Error: " . mysqli_error($connection) . "</p>";
                         echo "<p><a href='javascript:history.back()'>Return to User Entry</a></p>";
