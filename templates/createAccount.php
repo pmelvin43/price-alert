@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html>
-<body>
-    <?php
+<?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $servername = "localhost";
         $username = "25141755";
@@ -53,5 +50,3 @@
         echo "<p>Invalid request.</p>";
     }
     ?>
-</body>
-</html>
