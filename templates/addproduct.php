@@ -3,7 +3,6 @@
 <html>
 <body>
     <?php
-        session_start();
         $servername = "localhost";
         $username = "25141755";
         $password = "25141755";
@@ -13,21 +12,27 @@
         echo "<p>Unable to connect to database!</p>";
         exit();
     }
+
     if ($_SERVER["REQUEST_METHOD"]=="POST") {
         if (isset($_POST["productName"]) && isset($_POST["productPrice"])) {
             $productName = mysqli_real_escape_string($connection,$_POST["productName"]);
             $productPrice = mysqli_real_escape_string($connection,$_POST["productPrice"]);
             $description = mysqli_real_escape_string($connection, $_POST['description']);
-$add = "INSERT INTO product (productName, productPrice, description) VALUES ('$productName', '$productPrice', '$description')";
+            $add = "INSERT INTO product (productName, productPrice, description) VALUES ('$productName', '$productPrice', '$description')";
+            $result=mysqli_query($connection, $add);
+
     if (mysqli_query($connection, $add)) {
         echo "<script>alert('New product added successfully.'); window.location.href = 'home.jsp';</script>";
     } else {
         echo "<script>alert('Error adding product: " . mysqli_error($connection) . "'); window.location.href = 'home.jsp';</script>";
     }
+    }
 } else {
     echo "<script>alert('Invalid request'); window.location.href = 'home.jsp';</script>";
-}
+
 }
 
 $connection->close();
 ?>
+</body>
+</html>
