@@ -25,13 +25,13 @@
             $add = "INSERT INTO product (productName, price, description) VALUES ('$productName', '$productPrice', '$description')";
 
             if (mysqli_query($connection, $add)) {
-                echo "<script>alert('New product added successfully.'); window.location.href = 'home.jsp';</script>";
+                echo "<script>alert('New product added successfully.'); window.location.href = 'home.php';</script>";
             } else {
                 $error = mysqli_error($connection);
-                echo "<script>alert('Error adding product: " . addslashes($error) . "'); window.location.href = 'home.jsp';</script>";
+                echo "<script>alert('Error adding product: " . addslashes($error) . "'); window.location.href = 'home.php';</script>";
             }
         } else {
-            echo "<script>alert('Invalid request'); window.location.href = 'home.jsp';</script>";
+            echo "<script>alert('Invalid request'); window.location.href = 'home.php';</script>";
         }
     }
 
