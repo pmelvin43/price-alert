@@ -20,12 +20,12 @@
             $description = mysqli_real_escape_string($connection, $_POST['description']);
 $add = "INSERT INTO product (productName, productPrice, description) VALUES ('$productName', '$productPrice', '$description')";
     if (mysqli_query($connection, $add)) {
-        echo "<script>alert('New product added successfully.'); window.location.href = 'home.jsp';</script>";
+        echo "<script>alert('New product added successfully.'); window.location.href = 'home.php';</script>";
     } else {
-        echo "<script>alert('Error adding product: " . mysqli_error($connection) . "'); window.location.href = 'home.jsp';</script>";
+        echo "<script>alert('Error adding product: " . mysqli_error($connection) . "'); window.location.href = 'home.php';</script>";
     }
 } else {
-    echo "<script>alert('Invalid request'); window.location.href = 'home.jsp';</script>";
+    echo "<script>alert('Invalid request'); window.location.href = 'home.php';</script>";
 }
 
 $connection->close();
