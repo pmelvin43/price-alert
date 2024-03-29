@@ -27,6 +27,7 @@ $add = "INSERT INTO product (productName, productPrice, description) VALUES ('$p
 } else {
     echo "<script>alert('Invalid request'); window.location.href = 'home.jsp';</script>";
 }
+    }
 
 $connection->close();
 ?>
