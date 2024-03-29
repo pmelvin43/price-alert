@@ -23,7 +23,7 @@
             $productPrice = mysqli_real_escape_string($connection, $_POST["productPrice"]);
             $description = mysqli_real_escape_string($connection, $_POST["description"]);
 
-            $add = "INSERT INTO product (productName, productPrice, description) VALUES ('$productName', '$productPrice', '$description')";
+            $add = "INSERT INTO product (productName, price, description) VALUES ('$productName', '$productPrice', '$description')";
 
             if (mysqli_query($connection, $add)) {
                 echo "<script>alert('New product added successfully.'); window.location.href = 'home.jsp';</script>";
