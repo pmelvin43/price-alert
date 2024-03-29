@@ -1,7 +1,5 @@
 
-<!DOCTYPE html>
-<html>
-<body>
+
     <?php
         session_start();
         $servername = "localhost";
@@ -39,5 +37,4 @@
 
     mysqli_close($connection);
     ?>
-</body>
-</html>
+
