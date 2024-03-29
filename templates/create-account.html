@@ -34,9 +34,14 @@
     <h1>Price Alert</h1>
   </header>
 
-  <form method="post" action="createAccount.php" id="mainForm" onsubmit="return checkPassword(this)">
-  <div class="login-container">
-    <h2>Create Account</h2>
+  <form method="post" action="createAccount.php" id="mainForm" enctype="multipart/form-data"
+    onsubmit="return checkPassword(this)">
+    <div class="login-container">
+      <h2>Create Account</h2>
+      <div class="input-group">
+        <label for="userImage">Profile Picture</label>
+        <input type="file" name="userImage" id="userImage" accept="image/*">
+      </div>
       <div class="input-group">
         <label for="firstname">First Name</label>
         <input type="text" name="firstname" id="firstname" required>
@@ -64,8 +69,8 @@
       <div class="button-group">
         <button type="submit" class="sign-in-btn">Create Account</button>
       </div>
-  </div>
-</form>
+    </div>
+  </form>
 </body>
 
 </html>
