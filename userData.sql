@@ -31,8 +31,7 @@ CREATE TABLE `users` (
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `profile_picture` BLOB
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -40,7 +39,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`) VALUES
-('demo', 'demo', 'demo', 'demo@gmail.com', 'fe01ce2a7fbac8fafaed7c982a04e229');
+('dvader', 'darth', 'vader', 'vader@dark.force', '0f359740bd1cda994f8b55330c86d845');
 
 --
 -- Indexes for dumped tables
@@ -75,7 +74,7 @@ CREATE TABLE `userProducts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `userProducts` (`userName`, `productId`) VALUES
-('demo', 'B09WJDLFQM');
+('dvader', 'B09WJDLFQM');
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
