@@ -28,5 +28,5 @@ $add = "INSERT INTO product (productName, productPrice, description) VALUES ('$p
     echo "<script>alert('Invalid request'); window.location.href = 'home.php';</script>";
 }
 
-$connection->close();
+mysqli_close($connection);
 ?>
