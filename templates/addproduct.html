@@ -9,8 +9,12 @@
     <h2>Product Upload Form</h2>
     <form action="addproduct.php" method="post">
         <div>
+            <label for="productPicture">Product Picture:</label>
+            <input type="file" name="productPicture" id="productPicture" accept="image/*">
+          </div>
+        <div>
             <label for="productName">Product Name:</label><br>
-            <input type="text" id="productName" name="productName" required>
+            <input type="text" id="productName" name="productName" enctype="multipart/form-data" required>
         </div>
         <div>
             <label for="productPrice">Product Price:</label><br>
