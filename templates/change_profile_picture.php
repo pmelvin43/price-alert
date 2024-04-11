@@ -55,7 +55,10 @@ if (isset($_POST['submit']) && isset($_FILES['profilePicture'])) {
 
     $stmt->close();
 } else {
-    echo "No file submitted.";
+    echo '<script type="text/javascript">';
+    echo 'alert("No file submitted.");';
+    echo 'window.location.href="change_profile_picture.html";';
+    echo '</script>';
 }
 
 $connection->close();
