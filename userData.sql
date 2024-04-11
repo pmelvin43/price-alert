@@ -57,7 +57,8 @@ ALTER TABLE `users`
 CREATE TABLE `product` (
   `productId` varchar(255) NOT NULL,
   `productName` varchar(255) NOT NULL,
-  `price` decimal(10,2) NOT NULL
+  `price` decimal(10,2) NOT NULL,
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `product`
