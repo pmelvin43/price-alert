@@ -16,14 +16,20 @@ if (isset($_POST['submit']) && isset($_FILES['profilePicture'])) {
     $fileType = pathinfo($_FILES['profilePicture']['name'], PATHINFO_EXTENSION);
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
     if (!in_array(strtolower($fileType), $allowTypes)) {
-        echo "Sorry, only JPG, JPEG, PNG, & GIF files are allowed.";
+        echo '<script type="text/javascript">';
+        echo 'alert("Sorry, only JPG, JPEG, PNG, & GIF files are allowed.");';
+        echo 'window.location.href="change_profile_picture.html";';
+        echo '</script>';
         exit;
     }
 
     // Read the content of the file
     $imageContent = file_get_contents($image);
     if ($imageContent === false) {
-        echo "Failed to read the image file.";
+        echo '<script type="text/javascript">';
+        echo 'alert("Failed to read the image file.");';
+        echo 'window.location.href="change_profile_picture.html";';
+        echo '</script>';
         exit;
     }
 
@@ -36,9 +42,15 @@ if (isset($_POST['submit']) && isset($_FILES['profilePicture'])) {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-        echo "The profile picture has been updated successfully.";
+        echo '<script type="text/javascript">';
+        echo 'alert("The profile picture has been updated successfully.");';
+        echo 'window.location.href="userDash.php";';
+        echo '</script>';
     } else {
-        echo "Failed to update profile picture. It's possible that the profile picture is the same as before.";
+        echo '<script type="text/javascript">';
+        echo 'alert("Failed to update profile picture. It's possible that the profile picture is the same as before.");';
+        echo 'window.location.href="change_profile_picture.html";';
+        echo '</script>';
     }
 
     $stmt->close();
