@@ -8,6 +8,10 @@ if (!isset($_SESSION['username'])) {
 
 require_once 'db_connect.php';
 
+echo '<script type="text/javascript">';
+echo 'alert("Sorry, only JPG, JPEG, PNG, & GIF files are allowed.");';
+echo '</script>';
+
 if (isset($_POST['submit']) && isset($_FILES['profilePicture'])) {
     $username = $_SESSION['username'];
     $image = $_FILES['profilePicture']['tmp_name'];
