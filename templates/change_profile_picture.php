@@ -37,7 +37,7 @@ if (isset($_POST['submit']) && isset($_FILES['profilePicture'])) {
     $stmt = $connection->prepare("UPDATE users SET profile_picture = ? WHERE username = ?");
     // Bind the blob and username
     $null = null; // Placeholder for the blob data
-    $stmt->bind_param("bs", $null, $username);
+    $stmt->bind_param("sb", $null, $username);
     $stmt->send_long_data(0, $imageContent); // Sending the blob data
     $stmt->execute();
 
