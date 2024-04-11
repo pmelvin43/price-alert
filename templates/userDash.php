@@ -60,11 +60,8 @@ $connection->close();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Details - Price Tracker</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-    />
-    <link rel="stylesheet" href="../static/css/productPage.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/productpage.css" />
   </head>
   <body>
     <header id="masthead">
