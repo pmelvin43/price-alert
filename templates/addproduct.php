@@ -4,9 +4,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $servername = "localhost";
-$username = "26780833";
-$password = "26780833";
-$dbname = "db_26780833";
+$username = "25141755";
+$password = "25141755";
+$dbname = "db_25141755";
 $connection = new mysqli($servername, $username, $password, $dbname);
 
 if (mysqli_connect_error()) {
