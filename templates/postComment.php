@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitComment'])) {
     $connection->close();
 
     // Redirect back to the product page or a confirmation page
-    header('Location: product_details.php'); // Adjust the redirect as necessary
+    header('Location: productpage.php'); // Adjust the redirect as necessary
 } else {
     // If not a POST request or the form wasn't submitted correctly
     echo "Invalid request.";
