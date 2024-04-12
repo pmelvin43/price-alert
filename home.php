@@ -11,9 +11,9 @@
 <body>
 <header id="masthead">
     <div id="searchbar">
-        <form action="/search" method="get">
-            <input type="text" id="search" name="search" placeholder="Find Amazon Products" />
-            <button type="submit">Search</button>
+        <form action="search_newegg.php" method="get">
+            <input type="text" id="search" name="search" placeholder="Search products on Newegg" />
+        <button type="submit">Search</button>
         </form>
     </div>
     <h1>Price Alert</h1>
@@ -29,6 +29,21 @@
     <?php
     include('scrape.php');
 
+    // Get the search query from the URL
+$searchQuery = urlencode($_GET['search']);
+
+// Construct the URL for Newegg's search
+$searchUrl = "https://www.newegg.ca/p/pl?d=$searchQuery";
+
+// Fetch the search results page
+$searchContent = file_get_contents($searchUrl);
+
+// Check if the content was fetched successfully
+if ($searchContent === false) {
+    echo "Failed to retrieve search results.";
+    exit;
+}
+
     // URLs of the product pages
     $urls = array(
         "https://www.newegg.ca/msi-geforce-rtx-3060-rtx-3060-ventus-2x-12g-oc/p/N82E16814137632",
@@ -39,6 +54,8 @@
         "https://www.newegg.ca/gigabyte-geforce-rtx-4090-gv-n4090gaming-oc-24gd/p/N82E16814932550"
         // Add more URLs here if needed
     );
+
+    echo "<p>Search performed at: <a href=\"$searchUrl\">$searchUrl</a></p>";
 
     // Scrape product information
     $products = scrapeNeweggProductInfo($urls);
