@@ -48,7 +48,7 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: greenyellow; 
-    color: #e0e0e0; 
+    color: black; 
 }
 
 /* Styles for the link styled as a button */
@@ -71,7 +71,7 @@ button[type="submit"]:hover {
 
 #register-button a:hover {
     background-color: #293a8f;
-    color: black;
+    color: greenyellow;
 }
 
 #register-button {
