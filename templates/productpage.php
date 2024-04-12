@@ -23,54 +23,68 @@
 <br />
 <div class="content-container">
     <?php
-$servername = "localhost";
-$username = "25141755";
-$password = "25141755";
-$dbname = "db_25141755";
+    $servername = "localhost";
+    $dbUsername = "25141755"; // Make sure this is not the same as your form input name if you are using $_POST or $_GET
+    $password = "25141755";
+    $dbname = "db_25141755";
 
-// Create connection
-$connection = new mysqli($servername, $username, $password, $dbname);
+    // Create connection
+    $connection = new mysqli($servername, $dbUsername, $password, $dbname);
 
-// Check connection
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-}
+    // Check connection
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
 
-$product_id = 1; // This can be dynamic based on input or URL parameter
+    $product_id = 1; // This can be dynamic based on input or URL parameter
 
-$stmt = $connection->prepare("SELECT productName, price, description, productPicture FROM product WHERE productId = ?");
-$stmt->bind_param("i", $product_id);
-$stmt->execute();
-$result = $stmt->get_result();
+    // Fetch product details
+    $stmt = $connection->prepare("SELECT productName, price, description, productPicture FROM product WHERE productId = ?");
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $imgData = base64_encode($row['productPicture']);
+        echo '<div><img src="data:image/jpeg;base64,' . $imgData . '" alt="Product Image" width="300" height="200" />';
+        echo '<div><h2>Product Name: ' . htmlspecialchars($row['productName']) . '</h2>';
+        echo '<p>Product Description: ' . htmlspecialchars($row['description']) . '</p>';
+        echo '<h3>Current Price: $' . htmlspecialchars($row['price']) . '</h3></div></div>';
+    } else {
+        echo "Product not found.";
+    }
+    $stmt->close();
 
-    $imgData = base64_encode($row['productPicture']);
-    echo '<div><img src="data:image/jpeg;base64,' . $imgData . '" alt="Product Image" width="300" height="200" />';
-    echo '<div><h2>Product Name: ' . htmlspecialchars($row['productName']) . '</h2>';
-    echo '<p>Product Description: ' . htmlspecialchars($row['description']) . '</p>';
-    echo '<h3>Current Price: $' . htmlspecialchars($row['price']) . '</h3></div></div>';
-} else {
-    echo "Product not found.";
-}
+    // Fetch comments
+    $comment_stmt = $connection->prepare("SELECT username, commentText FROM comments WHERE productId = ?");
+    $comment_stmt->bind_param("i", $product_id);
+    $comment_stmt->execute();
+    $comment_result = $comment_stmt->get_result();
 
-$stmt->close();
-$connection->close();
-?>
+    echo '<div><h3>User Comments</h3>';
+    if ($comment_result->num_rows > 0) {
+        while ($comment_row = $comment_result->fetch_assoc()) {
+            echo '<div class="comment">';
+            echo '<p><strong>' . htmlspecialchars($comment_row['username']) . ':</strong> ';
+            echo htmlspecialchars($comment_row['commentText']) . '</p>';
+            echo '</div>';
+        }
+    } else {
+        echo "<p>No comments yet.</p>";
+    }
+    echo '</div>'; // Close the user comments section
+    $comment_stmt->close();
+
+    // Close the connection at the end
+    $connection->close();
+    ?>
 
     <div>
         <h3>Price History</h3>
         <p>Graph of Price History goes here</p>
     </div>
-    <div>
-        <h3>User Comments</h3>
-        <p>User Name: Comments go here</p>
-        <div>
-            <p><strong>User Name:</strong> Great product, good value!</p>
-        </div>
-        <p>More comments go here</p>
-    </div>
+
 </div>
 </body>
 </html>
