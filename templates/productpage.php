@@ -82,8 +82,6 @@
     <div>
         <h3>Post a Comment</h3>
         <form action="postComment.php" method="post">
-            <input type="text" name="username" placeholder="Your username" required />
-            <textarea name="commentText" placeholder="Your comment" required></textarea>
             <input type="hidden" name="productId" value="<?php echo $product_id; ?>" /> 
             <button type="submit" name="submitComment">Submit Comment</button>
         </form>
