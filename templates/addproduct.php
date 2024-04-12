@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        $add = "INSERT INTO product (productName, price, description, productPicture) VALUES ('$productName', '$productPrice', '$description', '$productPicture')";
+        $add = "INSERT INTO products (productName, price, description, productPicture) VALUES ('$productName', '$productPrice', '$description', '$productPicture')";
 
         if (mysqli_query($connection, $add)) {
             echo "<script>alert('New product added successfully.'); window.location.href = 'home.php';</script>";
