@@ -87,7 +87,7 @@ $connection->close();
       
       <!-- Profile Picture or Default Pic-->
       <img src="<?php echo $profilePicture; ?>" alt="Profile Picture" style="width: 100px; height: 100px; background-color: white;">
-      <a href="change_profile_picture.html">Change Profile Picture</a>
+      <a href="change_profile_picture.php">Change Profile Picture</a>
 
 
       <p>First Name: <?php echo htmlspecialchars($userDetails['firstName']); ?></p>
