@@ -83,6 +83,7 @@ $connection->close();
     <p>Last Name: <?php echo htmlspecialchars($userDetails['lastName']); ?></p>
     <p>Email: <?php echo htmlspecialchars($userDetails['email']); ?></p>
 
+    <a href="changepassword.html">Change Password</a>
     <!-- Display User's Saved Products -->
     <h2>Your Saved Products</h2>
     <form action="delete_user_products.php" method="post">
