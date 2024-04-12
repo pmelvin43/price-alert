@@ -32,31 +32,50 @@ input[type="text"] {
   text-indent: 10px;
 }
 
+/* Styles for submit buttons */
 button[type="submit"] {
   width: 8em;
   height: 2em;
   background-color: #141e46;
-  border: #141e46;
+  border: none; 
   color: white;
   font-weight: 500;
   font-size: 20px;
   border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; 
 }
 
+button[type="submit"]:hover {
+  background-color: greenyellow; 
+  color: black; 
+}
+
+/* Styles for the link styled as a button */
 #register-button a {
-  text-decoration: none;
+  display: inline-block; 
+  width: 8em;
+  height: 2em;
   background-color: #141e46;
-  font-size: 30px;
-  font-weight: 500;
+  border: none;
   color: white;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+  font-weight: 500;
+  font-size: 20px;
+  border-radius: 20px;
+  text-align: center; 
+  line-height: 2em; 
+  text-decoration: none; 
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#register-button a:hover {
+  background-color: #293a8f;
+  color: greenyellow;
 }
 
 #register-button {
-  margin-right: 2em;
+  margin-right: 0.5em;
 }
 
 body {
