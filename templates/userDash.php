@@ -76,11 +76,9 @@ $connection->close();
           <button type="submit">Search</button>
         </form>
       </div>
-
-        <a href="../home.php" class="button-link">
-          <h1>Price Alert</h1>
-        </a>
-
+      <div id="price-alert-button">
+        <a href="../home.php" class="button-link"><h1>Price Alert</h1></a>
+    </div>
       <div id="register-button">
         <a href="login.html">User Account</a>
       </div>

@@ -115,4 +115,10 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
 }
 
-
+#price-alert-button{
+    font-size: 50px;
+    font-weight: 700;
+    color: #141e46;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    margin-right: 5em;
+}
