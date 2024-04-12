@@ -119,8 +119,6 @@ body {
     display: inline-block;
     width: auto; 
     height: 2em; 
-    background-color: #141e46;
-    color: white;
     text-decoration: none; /* Remove underline */
     font-weight: 500;
     font-size: 20px;
