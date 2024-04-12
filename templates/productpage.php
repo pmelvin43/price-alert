@@ -28,17 +28,17 @@
     $password = "25141755";
     $dbname = "db_25141755";
 
-    // Create connection
+
     $connection = new mysqli($servername, $dbUsername, $password, $dbname);
 
-    // Check connection
+
     if ($connection->connect_error) {
         die("Connection failed: " . $connection->connect_error);
     }
 
     $product_id = 1; // This can be dynamic based on input or URL parameter
 
-    // Fetch product details
+ 
     $stmt = $connection->prepare("SELECT productName, price, description, productPicture FROM product WHERE productId = ?");
     $stmt->bind_param("i", $product_id);
     $stmt->execute();
@@ -56,7 +56,7 @@
     }
     $stmt->close();
 
-    // Fetch comments
+
     $comment_stmt = $connection->prepare("SELECT username, commentText FROM comments WHERE productId = ?");
     $comment_stmt->bind_param("i", $product_id);
     $comment_stmt->execute();
@@ -73,13 +73,13 @@
     } else {
         echo "<p>No comments yet.</p>";
     }
-    echo '</div>'; // Close the user comments section
+    echo '</div>'; 
     $comment_stmt->close();
 
-    // Close the connection at the end
+
     $connection->close();
     ?>
-   <!-- Comment Posting Form -->
+
     <div>
     <h3>Post a Comment</h3>
     <form action="postComment.php" method="post">
