@@ -16,7 +16,7 @@
         </form>
     </div>
     <h1>Price Alert</h1>
-    <div id="add-product-button">
+    <div id="register-button">
         <a href="templates/addproduct.html">Add Product</a>
     </div>
     <div id="register-button">
