@@ -114,6 +114,37 @@ $connection->close();
         <?php else: ?>
             <p>You have no saved products.</p>
         <?php endif; ?>
+        <!-- User's Saved Products with delete option -->
+      <h2>Your Saved Products</h2>
+        <form action="delete_user_products.php" method="post">
+          <ul>
+        <?php foreach ($products as $product): ?>
+            <li>
+                <?php echo htmlspecialchars($product['productName']); ?> - $<?php echo htmlspecialchars($product['price']); ?>
+                <button type="submit" name="deleteProductId" value="<?php echo $product['productId']; ?>">Delete</button>
+            </li>
+        <?php endforeach; ?>
+          </ul>
+        </form>
+
+        <!-- List all products with an option to add them -->
+      <h2>Available Products</h2>
+        <form action="add_user_products.php" method="post">
+        <div class="product-container" style="height: 200px; overflow-y: scroll;">
+        <?php
+        $productQuery = "SELECT productId, productName, price, description, productPicture FROM product";
+        $result = $connection->query($productQuery);
+        while ($product = $result->fetch_assoc()) {
+            echo '<div>';
+            echo '<input type="checkbox" name="productIds[]" value="' . $product['productId'] . '">';
+            echo '<img src="data:image/jpeg;base64,' . base64_encode($product['productPicture']) . '" style="width:50px; height:50px;"> ';
+            echo htmlspecialchars($product['productName']) . ' - $' . htmlspecialchars($product['price']);
+            echo '</div>';
+        }
+        ?>
+        </div>
+          <button type="submit">Add Selected Products</button>
+        </form>
 
       <a href="changepassword.html">Change Password</a>
     </div>
