@@ -5,6 +5,7 @@
     <title>Price Alert</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="stylesheet" href="static/css/indexStyle.css" />
+
 </head>
 
 <body>
@@ -25,49 +26,50 @@
 </header>
 
 <div id="items-container" class="items">
-    <!-- Items will be populated here dynamically -->
-</div>
+    <?php
+    include('scrape.php');
 
-<script>
-    // Number of items you want to add
-    var numberOfItems = 25; // Change this to the desired number of items
-    var itemsPerRow = 5; // Number of items per row
+    // URLs of the product pages
+    $urls = array(
+        "https://www.newegg.ca/msi-geforce-rtx-3060-rtx-3060-ventus-2x-12g-oc/p/N82E16814137632",
+        "https://www.newegg.ca/msi-geforce-rtx-4090-rtx-4090-suprim-liquid-x-24g/p/N82E16814137759",
+        "https://www.newegg.ca/gigabyte-geforce-rtx-4090-gv-n4090gaming-oc-24gd/p/N82E16814932550",
+        "https://www.newegg.ca/msi-geforce-rtx-3060-rtx-3060-ventus-2x-12g-oc/p/N82E16814137632",
+        "https://www.newegg.ca/msi-geforce-rtx-4090-rtx-4090-suprim-liquid-x-24g/p/N82E16814137759",
+        "https://www.newegg.ca/gigabyte-geforce-rtx-4090-gv-n4090gaming-oc-24gd/p/N82E16814932550"
+        // Add more URLs here if needed
+    );
 
-    // Function to generate and append items
-    function generateItems() {
-        var container = document.getElementById('items-container');
-        var counter = 0;
-        var currentRow;
+    // Scrape product information
+    $products = scrapeNeweggProductInfo($urls);
 
-        for (var i = 0; i < numberOfItems; i++) {
-            // Check if a new row needs to be created
-            if (counter % itemsPerRow === 0) {
-                currentRow = document.createElement('div');
-                currentRow.className = 'row';
-                container.appendChild(currentRow);
-            }
+    $numColumns = 3; // Define the number of columns
+    $numProducts = count($products);
+    $productsPerColumn = ceil($numProducts / $numColumns);
 
-            var itemDiv = document.createElement('div');
-            itemDiv.className = 'item';
-            itemDiv.innerHTML = `
-                <a href="productpage.html">
-                    <img src="static/images/exampleprod.jpg" alt="product image" class="product-image" />
+    for ($i = 0; $i < $numColumns; $i++):
+    ?>
+    <div class="column">
+        <?php
+        for ($j = $i * $productsPerColumn; $j < min(($i + 1) * $productsPerColumn, $numProducts); $j++):
+            $product = $products[$j];
+        ?>
+            <div class="item">
+                <a href="<?php echo $product['url']; ?>">
+                    <img src="<?php echo $product['imageURL']; ?>" alt="Product Image" class="product-image" />
                 </a>
                 <div class="item-background">
                     <p class="price-value">Best Price</p>
-                    <p class="item-price">$00.00</p>
-                    <p>List Price: $00.00</p>
+                    <p class="item-name"><?php echo $product['productName']; ?></p>
+                    <p>List Price: $<?php echo $product['price']; ?></p>
                     <p>Average Price: $00.00</p>
-                    <button class="amazon-button">View at Amazon</button>
+                    <a href="<?php echo $product['url']; ?>" target="_blank" class="amazon-button">View at Newegg</a>
                 </div>
-            `;
-            currentRow.appendChild(itemDiv);
-            counter++;
-        }
-    }
+            </div>
+        <?php endfor; ?>
+    </div>
+    <?php endfor; ?>
+</div>
 
-    // Call the function to generate items
-    generateItems();
-</script>
 </body>
 </html>
