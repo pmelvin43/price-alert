@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Product Upload</title>
-</head>
+<link rel="stylesheet" href="/acmiwsmnMSqweLwH"/></head>
 <body>
     <h2>Product Upload Form</h2>
-    <form action="addproduct.php" method="post">
+    <form action="addproduct.php" method="post" enctype="multipart/form-data"> 
+        <div>
+            <label for="productPicture">Product Picture:</label>
+            <input type="file" name="productPicture" id="productPicture" accept="image/*">
+        </div>
         <div>
             <label for="productName">Product Name:</label><br>
             <input type="text" id="productName" name="productName" required>
