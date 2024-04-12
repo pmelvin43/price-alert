@@ -72,7 +72,7 @@
     } else {
         echo "<p>No comments yet.</p>";
     }
-    echo '</div>'; // Close the user comments section
+    echo '</div>'; 
     $comment_stmt->close();
 
 
