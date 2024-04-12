@@ -8,82 +8,68 @@
     <link rel="stylesheet" href="../static/css/productPage.css" />
 </head>
 <body>
-    <header id="masthead">
-        <div id="searchbar">
-            <form action="/search" method="get">
-                <input type="text" id="search" name="search" placeholder="Find Amazon Products" />
-                <button type="submit">Search</button>
-            </form>
-        </div>
-        <h1>Price Alert</h1>
-        <div id="register-button">
-            <a href="login.html">User Account</a>
-        </div>
-    </header>
-    <br />
-    <div class="content-container">
-        <?php
-        $servername = "localhost";
-        $username = "25141755";
-        $password = "25141755";
-        $dbname = "db_25141755";
-
-        // Create connection using mysqli
-        $connection = new mysqli($servername, $username, $password, $dbname);
-
-        // Check connection
-        if ($connection->connect_error) {
-            die("Connection failed: " . $connection->connect_error);
-        }
-
-        $product_id = 1; // You might want to make this dynamic
-
-        // Prepare the SQL statement using $connection
-        $stmt = $connection->prepare("SELECT productName, price, description, productPicture FROM product WHERE productId = ?");
-        $stmt->bind_param("i", $product_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-
-            // Use base64_encode to encode the BLOB data
-            $imgData = base64_encode($row['productPicture']);
-
-            // Display product details
-            echo '<div><img src="data:image/jpeg;base64,' . $imgData . '" alt="Product Image" width="300" height="200" />';
-            echo '<div><h2>' . htmlspecialchars($row['productName']) . '</h2>';
-            echo '<p>' . htmlspecialchars($row['description']) . '</p>';
-            echo '<h3>Current Price: $' . htmlspecialchars($row['price']) . '</h3>';
-
-            echo '<div class="price-alert-form">
-                <form action="/setPriceAlert" method="post">
-                    <input type="text" name="alertPrice" placeholder="Enter your target price here" />
-                    <button type="submit">Set Price Alert</button>
-                </form>
-                </div></div></div>';
-        } else {
-            echo "<div>Product not found.</div>";
-        }
-
-        // Close the statement and the connection
-        $stmt->close();
-        $connection->close();
-        ?>
-
-        <div>
-            <h3>Price History</h3>
-            <p>Graph of Price History goes here</p>
-        </div>
-
-        <div>
-            <h3>User Comments</h3>
-            <p>User Name: Comments go here</p>
-            <div>
-                <p><strong>User Name:</strong> Great product, good value!</p>
-            </div>
-            <p>More comments go here</p>
-        </div>
+<header id="masthead">
+    <div id="searchbar">
+        <form action="/search" method="get">
+            <input type="text" id="search" name="search" placeholder="Find Amazon Products"/>
+            <button type="submit">Search</button>
+        </form>
     </div>
+    <h1>Price Alert</h1>
+    <div id="register-button">
+        <a href="login.html">User Account</a>
+    </div>
+</header>
+<br />
+<div class="content-container">
+    <?php
+    $servername = "localhost";
+    $username = "25141755";
+    $password = "25141755";
+    $dbname = "db_25141755";
+
+    // Create connection
+    $connection = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
+
+    $product_id = 1; // This can be dynamic based on input or URL parameter
+
+    $stmt = $connection->prepare("SELECT productName, price, description, productPicture FROM product WHERE productId = ?");
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+
+        $imgData = base64_encode($row['productPicture']);
+        echo '<div><img src="data:image/jpeg;base64,' . $imgData . '" alt="Product Image" width="300" height="200" />';
+        echo '<div><h2>' . htmlspecialchars($row['productName']) . '</h2>';
+        echo '<p>' . htmlspecialchars($row['description']) . '</p>';
+        echo '<h3>Current Price: $' . htmlspecialchars($row['price']) . '</h3></div></div>';
+    } else {
+        echo "Product not found.";
+    }
+
+    $stmt->close();
+    $connection->close();
+    ?>
+    <div>
+        <h3>Price History</h3>
+        <p>Graph of Price History goes here</p>
+    </div>
+    <div>
+        <h3>User Comments</h3>
+        <p>User Name: Comments go here</p>
+        <div>
+            <p><strong>User Name:</strong> Great product, good value!</p>
+        </div>
+        <p>More comments go here</p>
+    </div>
+</div>
 </body>
 </html>
