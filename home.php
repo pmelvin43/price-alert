@@ -55,7 +55,7 @@
             $product = $products[$j];
         ?>
             <div class="item">
-                <a href="<?php echo $product['url']; ?>">
+                <a href="templates/productpage.php">
                     <img src="<?php echo $product['imageURL']; ?>" alt="Product Image" class="product-image" />
                 </a>
                 <div class="item-background">
