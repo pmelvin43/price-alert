@@ -83,10 +83,11 @@
     <div>
     <h3>Post a Comment</h3>
     <form action="postComment.php" method="post">
-        <textarea name="commentText" placeholder="Your comment" required></textarea>
-        <input type="hidden" name="productId" value="<?php echo $product_id; ?>" />
-        <button type="submit" name="submitComment">Submit Comment</button>
+    <textarea name="commentText" placeholder="Your comment" required></textarea>
+    <input type="hidden" name="productId" value="<?php echo $product_id; ?>" />
+    <button type="submit" name="submitComment" style="all: revert;">Submit Comment</button>
     </form>
+
     </div>
 
     <div>
