@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Details - Price Tracker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="../static/css/productpage.css" />
+    <link rel="stylesheet" href="../static/css/productPage.css" />
 </head>
 <body>
     <header id="masthead">
@@ -38,7 +38,7 @@
 
         $product_id = 1; // You might want to make this dynamic
 
-        // Prepare the SQL statement using $connection, not $conn
+        // Prepare the SQL statement using $connection
         $stmt = $connection->prepare("SELECT productName, price, description, productPicture FROM product WHERE productId = ?");
         $stmt->bind_param("i", $product_id);
         $stmt->execute();
