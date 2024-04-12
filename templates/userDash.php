@@ -80,6 +80,13 @@ $connection->close();
       <div id="register-button">
         <a href="login.html">User Account</a>
       </div>
+      <form action="logout.php" method="post">
+      <div id="register-button">
+        <button type="submit" name="logout">
+          Log Out
+        </button>
+      </div>
+    </form>
     </header>
     <br />
     <div class="content-container">
