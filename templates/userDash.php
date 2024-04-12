@@ -1,122 +1,117 @@
-
 <?php
-// Start the session
+// Start the session and check user authentication
 session_start();
-
-// Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    // User is not logged in, redirect to login page
     header('Location: login.html');
     exit();
 }
 
 // Include database connection
 require_once 'db_connect.php';
+$username = $_SESSION['username'];
 
-// Fetch user details from the database
-$username = $_SESSION['username']; // The username stored in session
+// Fetch user details
 $stmt = $connection->prepare("SELECT firstName, lastName, email, profile_picture FROM users WHERE username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
-
 if ($result->num_rows > 0) {
-  $userDetails = $result->fetch_assoc();
-  if ($userDetails['profile_picture']) {
-      // If there's a profile picture, encode it for HTML display
-      $profilePicture = 'data:image/jpeg;base64,' . base64_encode($userDetails['profile_picture']);
-  } else {
-      // User does not have a profile pic stored, use a default
-      $profilePicture = 'default/default.jpg';
-  }
+    $userDetails = $result->fetch_assoc();
+    $profilePicture = $userDetails['profile_picture'] ? 'data:image/jpeg;base64,' . base64_encode($userDetails['profile_picture']) : 'default/default.jpg';
 } else {
-  // Handle error - user not found
-  echo "User not found.";
-  exit();
+    echo "User not found.";
+    $connection->close();
+    exit();
 }
 
 // Fetch user's saved products
-$productStmt = $connection->prepare("SELECT p.productName, p.price FROM userProducts up JOIN product p ON up.productId = p.productId WHERE up.username = ?");
+$productStmt = $connection->prepare("SELECT p.productId, p.productName, p.price FROM userProducts up JOIN product p ON up.productId = p.productId WHERE up.username = ?");
 $productStmt->bind_param("s", $username);
 $productStmt->execute();
 $productResult = $productStmt->get_result();
-
 $products = [];
 while ($row = $productResult->fetch_assoc()) {
     $products[] = $row;
 }
 
-// Close the statement and connection
+// Fetch all available products
+$productQuery = "SELECT productId, productName, price, description, productPicture FROM product";
+$allProducts = $connection->query($productQuery);
+
+// Close all statements and connections
 $stmt->close();
 $productStmt->close();
 $connection->close();
-
 ?>
+
 
 
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Details - Price Tracker</title>
     <link rel="stylesheet" type="text/css" href="../static/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="../static/css/productpage.css" />
-  </head>
-  <body>
-    <header id="masthead">
-      <div id="searchbar">
+</head>
+<body>
+<header id="masthead">
+    <div id="searchbar">
         <form action="/search" method="get">
-          <input
-            type="text"
-            id="search"
-            name="search"
-            placeholder="Find Amazon Products"
-          />
-          <button type="submit">Search</button>
+            <input type="text" id="search" name="search" placeholder="Find Amazon Products" />
+            <button type="submit">Search</button>
         </form>
-      </div>
-      <div id="price-alert-button">
+    </div>
+    <div id="price-alert-button">
         <a href="../home.php" class="button-link"><h1>Price Alert</h1></a>
     </div>
-      <div id="register-button">
+    <div id="register-button">
         <a href="login.html">User Account</a>
-      </div>
-      <form action="logout.php" method="post">
-      <div id="register-button">
-        <button type="submit" name="logout">
-          Log Out
-        </button>
-      </div>
-    </form>
-    </header>
-    <br />
-    <div class="content-container">
-      <h1>Welcome, <?php echo htmlspecialchars($username); ?>!</h1>
-      
-      <!-- Profile Picture or Default Pic-->
-      <img src="<?php echo $profilePicture; ?>" alt="Profile Picture" style="width: 100px; height: 100px; background-color: white;">
-      <a href="change_profile_picture.php">Change Profile Picture</a>
-
-
-      <p>First Name: <?php echo htmlspecialchars($userDetails['firstName']); ?></p>
-      <p>Last Name: <?php echo htmlspecialchars($userDetails['lastName']); ?></p>
-      <p>Email: <?php echo htmlspecialchars($userDetails['email']); ?></p>
-
-      <!-- User's Saved Products -->
-      <h2>Saved Products</h2>
-        <?php if (count($products) > 0): ?>
-            <ul>
-                <?php foreach ($products as $product): ?>
-                    <li><?php echo htmlspecialchars($product['productName']); ?> - $<?php echo htmlspecialchars($product['price']); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        <?php else: ?>
-            <p>You have no saved products.</p>
-        <?php endif; ?>
-
-      <a href="changepassword.html">Change Password</a>
     </div>
-  </body>
+    <form action="logout.php" method="post">
+        <button type="submit" name="logout">Log Out</button>
+    </form>
+</header>
+<br />
+<div class="content-container">
+    <h1>Welcome, <?php echo htmlspecialchars($username); ?></h1>
+    <img src="<?php echo $profilePicture; ?>" alt="Profile Picture" style="width: 100px; height: 100px; background-color: white;">
+    <a href="change_profile_picture.php">Change Profile Picture</a>
+    <p>First Name: <?php echo htmlspecialchars($userDetails['firstName']); ?></p>
+    <p>Last Name: <?php echo htmlspecialchars($userDetails['lastName']); ?></p>
+    <p>Email: <?php echo htmlspecialchars($userDetails['email']); ?></p>
+
+    <a href="changepassword.html">Change Password</a>
+    <!-- Display User's Saved Products -->
+    <h2>Your Saved Products</h2>
+    <form action="delete_user_products.php" method="post">
+        <ul>
+            <?php foreach ($products as $product): ?>
+                <li>
+                    <?php echo htmlspecialchars($product['productName']); ?> - $<?php echo htmlspecialchars($product['price']); ?>
+                    <button type="submit" name="deleteProductId" value="<?php echo $product['productId']; ?>">Delete</button>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </form>
+
+    <!-- Display Available Products -->
+    <h2>Available Products</h2>
+    <form action="add_user_products.php" method="post">
+        <div class="product-container" style="height: 200px; overflow-y: scroll;">
+            <?php while ($product = $allProducts->fetch_assoc()): ?>
+                <div>
+                    <input type="checkbox" name="productIds[]" value="<?php echo $product['productId']; ?>">
+                    <img src="data:image/jpeg;base64,<?php echo base64_encode($product['productPicture']); ?>" style="width:50px; height:50px;"> 
+                    <?php echo htmlspecialchars($product['productName']) . ' - $' . htmlspecialchars($product['price']); ?>
+                </div>
+            <?php endwhile; ?>
+        </div>
+        <button type="submit">Add Selected Products</button>
+    </form>
+</div>
+</body>
 </html>
+
