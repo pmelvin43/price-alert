@@ -79,7 +79,15 @@
     // Close the connection at the end
     $connection->close();
     ?>
-
+    <div>
+        <h3>Post a Comment</h3>
+        <form action="postComment.php" method="post">
+            <input type="text" name="username" placeholder="Your username" required />
+            <textarea name="commentText" placeholder="Your comment" required></textarea>
+            <input type="hidden" name="productId" value="<?php echo $product_id; ?>" /> 
+            <button type="submit" name="submitComment">Submit Comment</button>
+        </form>
+    </div>
     <div>
         <h3>Price History</h3>
         <p>Graph of Price History goes here</p>
