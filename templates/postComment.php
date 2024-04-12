@@ -12,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitComment'])) {
 
     $connection = new mysqli($servername, $dbUsername, $password, $dbname);
 
-    // Check the connection
     if ($connection->connect_error) {
         die("Connection failed: " . $connection->connect_error);
     }
