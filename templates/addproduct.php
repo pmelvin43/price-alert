@@ -20,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $productPrice = mysqli_real_escape_string($connection, $_POST["productPrice"]);
         $description = mysqli_real_escape_string($connection, $_POST["description"]);
 
-        // Handle file upload
         if ($_FILES['productPicture']['error'] == 0) {
             $productPicture = addslashes(file_get_contents($_FILES['productPicture']['tmp_name']));
         } else {
