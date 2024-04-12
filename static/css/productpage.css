@@ -44,19 +44,18 @@ button[type="submit"] {
 }
 
 #register-button a {
-    text-decoration: none;
+    width: 8em;
+    height: 2em;
     background-color: #141e46;
-    font-size: 30px;
-    font-weight: 500;
+    border: #141e46;
     color: white;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
+    font-weight: 500;
+    font-size: 20px;
+    border-radius: 20px;
 }
 
 #register-button {
-    margin-right: 2em;
+    margin-right: 1em;
 }
 
 body {
