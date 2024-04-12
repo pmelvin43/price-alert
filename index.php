@@ -1,2 +1,2 @@
-<?php header("Location: templates/home.php");?>                
-## Change this to landing page
+<?php header("Location: home.php");?>                ## Change this
+to landing page
