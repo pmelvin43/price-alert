@@ -115,10 +115,24 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
 }
 
-#price-alert-button{
-    font-size: 50px;
-    font-weight: 700;
-    color: #141e46;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-    margin-right: 5em;
+#price-alert-button a {
+    display: inline-block;
+    width: auto; 
+    height: 2em; 
+    background-color: #141e46;
+    color: white;
+    text-decoration: none; /* Remove underline */
+    font-weight: 500;
+    font-size: 20px;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 2em;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-right: 0.5em; 
+}
+
+#price-alert-button a:hover {
+    background-color: #293a8f; /* Adjust hover background color as needed */
+    color: greenyellow; /* Adjust hover text color as needed */
 }
