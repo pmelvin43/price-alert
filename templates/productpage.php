@@ -23,41 +23,42 @@
 <br />
 <div class="content-container">
     <?php
-    $servername = "localhost";
-    $username = "25141755";
-    $password = "25141755";
-    $dbname = "db_25141755";
+$servername = "localhost";
+$username = "25141755";
+$password = "25141755";
+$dbname = "db_25141755";
 
-    // Create connection
-    $connection = new mysqli($servername, $username, $password, $dbname);
+// Create connection
+$connection = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
-    }
+// Check connection
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
 
-    $product_id = 1; // This can be dynamic based on input or URL parameter
+$product_id = 1; // This can be dynamic based on input or URL parameter
 
-    $stmt = $connection->prepare("SELECT productName, price, description, productPicture FROM product WHERE productId = ?");
-    $stmt->bind_param("i", $product_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+$stmt = $connection->prepare("SELECT productName, price, description, productPicture FROM product WHERE productId = ?");
+$stmt->bind_param("i", $product_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
 
-        $imgData = base64_encode($row['productPicture']);
-        echo '<div><img src="data:image/jpeg;base64,' . $imgData . '" alt="Product Image" width="300" height="200" />';
-        echo '<div><h2>' . htmlspecialchars($row['productName']) . '</h2>';
-        echo '<p>' . htmlspecialchars($row['description']) . '</p>';
-        echo '<h3>Current Price: $' . htmlspecialchars($row['price']) . '</h3></div></div>';
-    } else {
-        echo "Product not found.";
-    }
+    $imgData = base64_encode($row['productPicture']);
+    echo '<div><img src="data:image/jpeg;base64,' . $imgData . '" alt="Product Image" width="300" height="200" />';
+    echo '<div><h2>Product Name: ' . htmlspecialchars($row['productName']) . '</h2>';
+    echo '<p>Product Description: ' . htmlspecialchars($row['description']) . '</p>';
+    echo '<h3>Current Price: $' . htmlspecialchars($row['price']) . '</h3></div></div>';
+} else {
+    echo "Product not found.";
+}
 
-    $stmt->close();
-    $connection->close();
-    ?>
+$stmt->close();
+$connection->close();
+?>
+
     <div>
         <h3>Price History</h3>
         <p>Graph of Price History goes here</p>
