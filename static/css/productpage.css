@@ -32,31 +32,52 @@ input[type="text"] {
     text-indent: 10px;
 }
 
+/* Styles for submit buttons */
 button[type="submit"] {
     width: 8em;
     height: 2em;
     background-color: #141e46;
-    border: #141e46;
+    border: none; /* Adjusted to remove border styles for clarity */
     color: white;
     font-weight: 500;
     font-size: 20px;
     border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
 }
 
+button[type="submit"]:hover {
+    background-color: #293a8f; /* Darker or different color on hover */
+    color: #e0e0e0; /* Light grey color for text on hover */
+}
+
+/* Styles for the link styled as a button */
 #register-button a {
+    display: inline-block; /* Ensures width and height are respected */
     width: 8em;
     height: 2em;
     background-color: #141e46;
-    border: #141e46;
+    border: none;
     color: white;
     font-weight: 500;
     font-size: 20px;
     border-radius: 20px;
+    text-align: center; /* Centers text within the 'button' */
+    line-height: 2em; /* Vertically centers the text in the button */
+    text-decoration: none; /* Removes underline from the link */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#register-button a:hover {
+    background-color: #293a8f;
+    color: #e0e0e0;
 }
 
 #register-button {
     margin-right: 1em;
 }
+
 
 body {
     background-color: #f0f0f0;
