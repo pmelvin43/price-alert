@@ -130,7 +130,6 @@ body {
     margin-right: 0.5em; 
 }
 
-#price-alert-button a:hover {
-    background-color: #293a8f; /* Adjust hover background color as needed */
-    color: greenyellow; /* Adjust hover text color as needed */
-}
+/* #price-alert-button a:hover {
+
+} */
