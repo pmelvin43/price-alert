@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details - Price Tracker</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="../static/css/productpage.css" />
+</head>
+
+<body>
+  <header id="masthead">
+    <div id="searchbar">
+      <form action="/search" method="get">
+        <input type="text" id="search" name="search" placeholder="Find Amazon Products" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <h1>Price Alert</h1>
+    <div id="register-button">
+      <a href="login.html">User Account</a>
+    </div>
+    <form action="logout.php" method="post">
+      <div id="register-button">
+        <button type="submit" name="logout">
+          Log Out
+        </button>
+      </div>
+    </form>
+
+  </header>
+  <br />
+  <div class="content-container">
+    <div>
+      <img src="../static/images/exampleprod.jpg" alt="Product Image" width="300" height="200" />
+      <div>
+        <h2>Product Name</h2>
+        <p>Description of the product...</p>
+        <h3>Current Price: $XX.XX</h3>
+
+        <div class="price-alert-form">
+          <form action="/setPriceAlert" method="post">
+            <input type="text" name="alertPrice" placeholder="Enter your target price here" />
+            <button type="submit">Set Price Alert</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3>Price History</h3>
+      <p>Graph of Price History goes here</p>
+    </div>
+
+    <div>
+      <h3>User Comments</h3>
+      <p>User Name: Comments go here</p>
+      <div>
+        <p><strong>User Name:</strong> Great product, good value!</p>
+      </div>
+      <p>More comments go here</p>
+    </div>
+  </div>
+</body>
+
+</html>

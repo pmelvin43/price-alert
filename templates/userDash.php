@@ -80,6 +80,13 @@ $connection->close();
       <div id="register-button">
         <a href="login.html">User Account</a>
       </div>
+      <form action="logout.php" method="post">
+      <div id="register-button">
+        <button type="submit" name="logout">
+          Log Out
+        </button>
+      </div>
+    </form>
     </header>
     <br />
     <div class="content-container">
@@ -87,7 +94,7 @@ $connection->close();
       
       <!-- Profile Picture or Default Pic-->
       <img src="<?php echo $profilePicture; ?>" alt="Profile Picture" style="width: 100px; height: 100px; background-color: white;">
-      <a href="change_profile_picture.html">Change Profile Picture</a>
+      <a href="change_profile_picture.php">Change Profile Picture</a>
 
 
       <p>First Name: <?php echo htmlspecialchars($userDetails['firstName']); ?></p>
